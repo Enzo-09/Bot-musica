@@ -7,8 +7,15 @@ const client = new Client({
 });
 
 const nodes: NodeGroup[] = [
-  { name: "main", host: process.env.LAVALINK_HOST || "localhost", port: Number(process.env.LAVALINK_PORT) || 2333, password: process.env.LAVALINK_PASSWORD || "youshallnotpass", secure: false },
+  {
+    name: "main",
+    host: process.env.LAVALINK_HOST!,
+    port: Number(process.env.LAVALINK_PORT!),
+    password: process.env.LAVALINK_PASSWORD!,
+    secure: false
+  }
 ];
+console.log(`[Boot] Conectando a Lavalink en ${process.env.LAVALINK_HOST}:${process.env.LAVALINK_PORT}`);
 
 const poru = new Poru(client as any, nodes, { library: "discord.js", defaultPlatform: "ytsearch" });
 poru.on("nodeConnect", node => console.log(`[Lavalink] Conectado a ${node.name}`));
